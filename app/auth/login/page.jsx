@@ -1,14 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import NavBar from '../../components/NavBar';
 import { login } from '@/lib/auth';
+import { getSearchParams } from '@/lib/helpers';
 
-export const Login = () => {
+export default function Login() {
   const router = useRouter();
-  const searchParams = useSearchParams()
 
   const [ password, setPassword ] = useState('');
   const [ username, setUsername ] = useState('');
@@ -21,7 +21,7 @@ export const Login = () => {
       setLoading(false);
       if (response === true) {
         pass.setCustomValidity("");
-        const redirect = searchParams.get('redirect')
+        const redirect = getSearchParams('redirect')
         router.push(redirect || '/');
       }
     }).catch((error) => {
@@ -63,6 +63,3 @@ export const Login = () => {
     </>
   );
 }
-
-
-export default Login;

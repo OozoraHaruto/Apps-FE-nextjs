@@ -3,7 +3,7 @@ export const metadata = {
   description: "Privacy Policy of SG Weather",
 };
 
-export const PrivacyDefault = () => {
+export default function PrivacySGWeather() {
   return (
     <main className="centerbox">
       <wa-card with-header class="card-header">
@@ -24,5 +24,3 @@ export const PrivacyDefault = () => {
     </main>
   );
 }
-
-export default PrivacyDefault;

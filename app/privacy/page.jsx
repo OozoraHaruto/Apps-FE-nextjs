@@ -3,7 +3,7 @@ export const metadata = {
   description: "Privacy Policy of Haruto Apps",
 };
 
-export const PrivacyDefault = () => {
+export default function PrivacyDefault() {
   return (
     <main className="centerbox">
       <wa-card with-header class="card-header">
@@ -20,5 +20,3 @@ export const PrivacyDefault = () => {
     </main>
   );
 }
-
-export default PrivacyDefault;

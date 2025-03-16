@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import { clearAuthStorage } from '@/lib/auth';
 
-export const Login = () => {
+export default function Logout() {
   const router = useRouter()
 
   useEffect(() => {
@@ -21,6 +21,3 @@ export const Login = () => {
     </main>
   );
 }
-
-
-export default Login;
