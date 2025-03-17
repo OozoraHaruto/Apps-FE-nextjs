@@ -6,9 +6,6 @@ const nextConfig: NextConfig = {
     AUTH_TOKEN: process.env.AUTH_TOKEN,
     Test: "Hello World",
   },
-  sassOptions: {
-    implementation: 'sass-embedded',
-  },
 };
 
 export default nextConfig;
