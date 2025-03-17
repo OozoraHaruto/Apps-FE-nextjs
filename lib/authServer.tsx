@@ -1,6 +1,6 @@
-import { cookies } from 'next/headers'
+import { cookies } from 'next/headers';
 
-import { AuthDataProfile, COOKIE_NAME, validateJWT } from './auth'
+import { AuthDataProfile, COOKIE_NAME, validateJWT } from './auth';
 import { apps_auth_profile } from "./urls";
 
 export const getProfile = async (): Promise<AuthDataProfile | null> => {

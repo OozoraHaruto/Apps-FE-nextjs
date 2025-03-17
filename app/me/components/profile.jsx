@@ -1,6 +1,6 @@
 import { getProfile } from '@/lib/authServer';
-import style from './profile.module.css'
-import Link from 'next/link'
+import Link from 'next/link';
+import style from './profile.module.css';
 
 export default async function Profile() {
   const profileData = getProfile()
@@ -9,7 +9,7 @@ export default async function Profile() {
   return (
     <>
       <title>{ profile.name }</title>
-      <meta name="description" content={`${profile.name}'s profile on Haruto Apps`} />
+      <meta name="description" content={ `${profile.name}'s profile on Haruto Apps` } />
       <main className="justifyCenter">
         <div className='wa-stack'>
           <div className='justifyCenter'>

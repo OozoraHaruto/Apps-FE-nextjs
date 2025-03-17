@@ -1,4 +1,4 @@
-import style from './loading.module.css'
+import style from './loading.module.css';
 
 export default async function LoadingProfile() {
   return (

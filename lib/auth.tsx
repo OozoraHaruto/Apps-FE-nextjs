@@ -1,5 +1,5 @@
-import sha3 from 'crypto-js/sha3';
 import md5 from 'crypto-js/md5';
+import sha3 from 'crypto-js/sha3';
 import { jwtVerify } from 'jose';
 
 import { apps_auth_login, apps_auth_refresh } from "@/lib/urls";
@@ -12,7 +12,7 @@ const SESS_LAST_CHECK = 'lastCheck';
 const CHECK_INTERVAL = 1000 * 60; // 1 min
 
 export const COOKIE_NAME = '_SESSION_JWT';
-const COOKIE_EXPIRE = 3*24*60*60*1000; // 3 days
+const COOKIE_EXPIRE = 3 * 24 * 60 * 60 * 1000; // 3 days
 
 
 export const encryptPassword = (password: string) => {
@@ -44,42 +44,42 @@ export const saveAuthResponse = (data: AuthData) => {
 
   const d = new Date();
   d.setTime(d.getTime() + COOKIE_EXPIRE);
-  const expires = "expires="+ d.toUTCString();
+  const expires = "expires=" + d.toUTCString();
   document.cookie = COOKIE_NAME + "=" + data.token + ";" + expires + ";path=/";
 }
 
 // call this function when you want to authenticate the user
 export const login = async (username: string, password: string) => {
-    if (username === '' || password === '') {
-      return false;
-    }
-
-    const hash = encryptPassword(password);
-    const response = await fetch(apps_auth_login, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username: username, password: hash }),
-    });
-
-    const rsp_json = await response.json();
-    if (!rsp_json) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    if (rsp_json.success === true && rsp_json.data) {
-      saveAuthResponse(rsp_json.data);
-      return true;
-    } else if (rsp_json.error && rsp_json.error.code === 7) {
-      throw new Error("Invalid username or password");
-    }
-
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
+  if (username === '' || password === '') {
     return false;
+  }
+
+  const hash = encryptPassword(password);
+  const response = await fetch(apps_auth_login, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username: username, password: hash }),
+  });
+
+  const rsp_json = await response.json();
+  if (!rsp_json) {
+    throw new Error(`Response status: ${response.status}`);
+  }
+
+  if (rsp_json.success === true && rsp_json.data) {
+    saveAuthResponse(rsp_json.data);
+    return true;
+  } else if (rsp_json.error && rsp_json.error.code === 7) {
+    throw new Error("Invalid username or password");
+  }
+
+  if (!response.ok) {
+    throw new Error(`Response status: ${response.status}`);
+  }
+
+  return false;
 };
 
 export const validateJWT = async (jwt: string): Promise<boolean> => {
@@ -147,33 +147,33 @@ export const getProfileData = async (): Promise<AuthDataProfile | null> => {
 }
 
 export const refreshToken = async (jwt: string): Promise<AuthDataProfile | null> => {
-    if (jwt === '') {
-      return null;
-    }
-
-    const response = await fetch(apps_auth_refresh, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${jwt}`
-      },
-    });
-
-    const rsp_json = await response.json();
-    if (!rsp_json) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    if (rsp_json.success === true && rsp_json.data) {
-      saveAuthResponse(rsp_json.data);
-      return rsp_json.data.profile;
-    } else if (rsp_json.error && rsp_json.error.code === 7) {
-      throw new Error("Invalid username or password");
-    }
-
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
+  if (jwt === '') {
     return null;
+  }
+
+  const response = await fetch(apps_auth_refresh, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${jwt}`
+    },
+  });
+
+  const rsp_json = await response.json();
+  if (!rsp_json) {
+    throw new Error(`Response status: ${response.status}`);
+  }
+
+  if (rsp_json.success === true && rsp_json.data) {
+    saveAuthResponse(rsp_json.data);
+    return rsp_json.data.profile;
+  } else if (rsp_json.error && rsp_json.error.code === 7) {
+    throw new Error("Invalid username or password");
+  }
+
+  if (!response.ok) {
+    throw new Error(`Response status: ${response.status}`);
+  }
+
+  return null;
 };

@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import { NavBarLink, NavBarDropDownLink } from './NavBarLink';
 import { getProfileData } from '@/lib/auth';
 import styles from './index.module.css';
+import { NavBarDropDownLink, NavBarLink } from './NavBarLink';
 
 export const NavBar = (showLogin = false) => {
   const [ user, setUser ] = useState(null);
@@ -20,15 +20,15 @@ export const NavBar = (showLogin = false) => {
   return (
     <header slot="header" className="wa-split">
       <div className="wa-cluster wa-gap-xs wa-align-items-center">
-        {/* <wa-icon name="feather-pointed" style={ { color: "var(--wa-color-brand-fill-loud)" } }></wa-icon> */}
-        {/* <span id="brand-name" className="wa-heading-s wa-desktop-only">Audubon Worldwide</span> */}
+        {/* <wa-icon name="feather-pointed" style={ { color: "var(--wa-color-brand-fill-loud)" } }></wa-icon> */ }
+        {/* <span id="brand-name" className="wa-heading-s wa-desktop-only">Audubon Worldwide</span> */ }
         <NavBarLink title="Home" to="/" icon="home" />
         { user && (<NavBarLink title="Me" to="/me" icon="face-smile" />) }
       </div>
       <div className="wa-cluster wa-gap-l">
         { showLogin === true && user && (
           <NavBarLink title="Login" to="/auth/login" icon="right-to-bracket" />
-        )}
+        ) }
         {
           user && (
             <wa-dropdown>
@@ -38,7 +38,7 @@ export const NavBar = (showLogin = false) => {
                   label="User's avatar"
                   loading="lazy"
                   slot="prefix"
-                  id={styles.navUserAvatar}
+                  id={ styles.navUserAvatar }
                 ></wa-avatar>
                 <span>{ user.name }</span>
               </wa-button>

@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-import NavBar from '../../components/NavBar';
 import { login } from '@/lib/auth';
 import { getSearchParams } from '@/lib/helpers';
+import NavBar from '../../components/NavBar';
 
 export default function Login() {
   const router = useRouter();
@@ -47,16 +47,16 @@ export default function Login() {
       <NavBar />
       <main className="centerbox">
         <wa-card>
-          <form className="input-validation-type input-validation-custom" onSubmit={(event) => {
+          <form className="input-validation-type input-validation-custom" onSubmit={ (event) => {
             event.preventDefault();
             checkPassword();
-          }}>
-            <wa-input id="username" label="Username/E-mail" autofocus value={username} required></wa-input>
+          } }>
+            <wa-input id="username" label="Username/E-mail" autofocus value={ username } required></wa-input>
             <br />
-            <wa-input type="password" id="password" label="Password" passwordToggle value={password} required></wa-input>
+            <wa-input type="password" id="password" label="Password" passwordToggle value={ password } required></wa-input>
             <br />
-            <wa-button type="submit" variant="brand" loading={loading}>Submit</wa-button>
-            <wa-button type="reset" variant="neutral" loading={loading}>Reset</wa-button>
+            <wa-button type="submit" variant="brand" loading={ loading }>Submit</wa-button>
+            <wa-button type="reset" variant="neutral" loading={ loading }>Reset</wa-button>
           </form>
         </wa-card>
       </main>
