@@ -1,3 +1,7 @@
 #profileViewUserAvatar {
   --size: 200px;
 }
+
+#profileViewHeader {
+  margin: 0;
+}

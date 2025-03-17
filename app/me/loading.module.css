@@ -3,3 +3,12 @@
   height: 200px;
   --border-radius: 200px;
 }
+
+.profileViewWords {
+  width: 200px;
+  height: 1rem;
+}
+
+#profileViewHeader {
+  margin: 0;
+}

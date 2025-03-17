@@ -3,15 +3,14 @@ import Link from 'next/link';
 import style from './profile.module.css';
 
 export default async function Profile() {
-  const profileData = getProfile()
-  const [ profile ] = await Promise.all([ profileData ])
+  const [ profile ] = await Promise.all([ getProfile() ])
 
   return (
     <>
       <title>{ profile.name }</title>
       <meta name="description" content={ `${profile.name}'s profile on Haruto Apps` } />
       <main className="justifyCenter">
-        <div className='wa-stack'>
+        <div className='wa-stack  wa-align-items-center wa-gap-l'>
           <div className='justifyCenter'>
             <wa-avatar
               image={ profile.icon }
@@ -21,7 +20,7 @@ export default async function Profile() {
             ></wa-avatar>
           </div>
           <div className='justifyCenter'>
-            <h1>{ profile.name }</h1>
+            <h1 id={ style.profileViewHeader }>{ profile.name }</h1>
           </div>
           <div>
             <wa-card with-header with-footer class="card-header card-footer">
