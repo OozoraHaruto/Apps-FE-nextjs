@@ -14,3 +14,13 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+.justifyCenter {
+  display: flex;
+  justify-content: center;
+}
+
+.justifyEnd {
+  display: flex;
+  justify-content: end;
+}
