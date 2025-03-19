@@ -23,6 +23,7 @@ export const NavBar = (showLogin = false) => {
         {/* <wa-icon name="feather-pointed" style={ { color: "var(--wa-color-brand-fill-loud)" } }></wa-icon> */ }
         {/* <span id="brand-name" className="wa-heading-s wa-desktop-only">Audubon Worldwide</span> */ }
         <NavBarLink title="Home" to="/" icon="home" />
+        <NavBarLink title="Portfolio" to="/portfolio" icon="briefcase" />
         { user && (<NavBarLink title="Me" to="/me" icon="face-smile" />) }
       </div>
       <div className="wa-cluster wa-gap-l">

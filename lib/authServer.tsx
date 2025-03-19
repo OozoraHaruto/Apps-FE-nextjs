@@ -1,9 +1,12 @@
 import { cookies } from 'next/headers';
 
+import { sleep } from '@/lib/helpers';
 import { AuthDataProfile, COOKIE_NAME, validateJWT } from './auth';
 import { apps_auth_profile } from "./urls";
 
 export const getProfile = async (): Promise<AuthDataProfile | null> => {
+  await sleep(5000)
+
   const jwt = (await cookies()).get(COOKIE_NAME)?.value
   if (!jwt) { // no jwt no need care
     return null;

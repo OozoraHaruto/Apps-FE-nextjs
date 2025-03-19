@@ -2,7 +2,17 @@ export const apps_base_url: string = 'https://api.harutoapps.org/';
 // export const apps_base_url: string = 'http://localhost:8000/';
 
 // auth
-export const apps_auth_login: string = apps_base_url + 'auth/login';
-export const apps_auth_register: string = apps_base_url + 'auth/register';
-export const apps_auth_refresh: string = apps_base_url + 'auth/refresh';
-export const apps_auth_profile: string = apps_base_url + 'auth/profile';
+const apps_auth_base: string = apps_base_url + 'auth/';
+export const apps_auth_login: string = apps_auth_base + 'login';
+export const apps_auth_register: string = apps_auth_base + 'register';
+export const apps_auth_refresh: string = apps_auth_base + 'refresh';
+export const apps_auth_profile: string = apps_auth_base + 'profile';
+
+// portfolio
+const apps_portfolio_base: string = apps_base_url + 'portfolio/';
+export const apps_portfolio_certifications: string = apps_portfolio_base + 'certifications';
+export const apps_portfolio_languages: string = apps_portfolio_base + 'languages';
+export const apps_portfolio_projects: string = apps_portfolio_base + 'projects';
+export const apps_portfolio_schools: string = apps_portfolio_base + 'schools';
+export const apps_portfolio_skills: string = apps_portfolio_base + 'skills';
+export const apps_portfolio_work: string = apps_portfolio_base + 'work';

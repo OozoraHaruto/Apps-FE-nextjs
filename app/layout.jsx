@@ -18,7 +18,7 @@ export default function RootLayout({
       </head>
       <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
-        <wa-page mobile-breakpoint={ app_mobile_breakpoint } className="wa-dark">
+        <wa-page mobile-breakpoint={ app_mobile_breakpoint }>
           { children }
         </wa-page>
       </body>

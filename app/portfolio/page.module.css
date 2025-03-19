@@ -1,0 +1,65 @@
+#portfolioMainDiv {
+  padding-top: 0px;
+}
+
+#portfolioFistDiv {
+  height: 50vh;
+  min-height: 400px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#portfolioFistDiv > div > h1, #portfolioFistDiv > div > h2, #portfolioFistDiv > div > h3 {
+  margin: 0;
+}
+
+#portfolioExternalLinks > a > wa-icon-button {
+  font-size: 1.5rem;
+}
+
+.iconRowHeaderText {
+  font-size: calc(1.15rem* var(--wa-font-size-scale));
+  margin: 0;
+}
+
+.iconRowHeaderIcon {
+  width: 49px;
+}
+
+.tagWithIcon {
+  margin-right: 10px;
+}
+
+.pageSectionMaxSizeContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.pageSectionMaxSize {
+  max-width: 1200px;
+}
+
+.pageSectionMaxSizeGrid {
+  --min-column-size: 333px;
+}
+
+.SeeMoreContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.SeeMoreContainer > wa-divider {
+  flex-grow: 1;
+}
+
+#workDetails > ul > ul {
+  margin-bottom: 0;
+}
