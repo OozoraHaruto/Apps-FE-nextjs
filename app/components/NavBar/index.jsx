@@ -33,7 +33,7 @@ export const NavBar = (showLogin = false) => {
         {
           user && (
             <wa-dropdown>
-              <wa-button slot="trigger" size="small" caret>
+              <wa-button slot="trigger" appearance="plain" size="small" variant="brand" caret>
                 <wa-avatar
                   image={ user.icon }
                   label="User's avatar"

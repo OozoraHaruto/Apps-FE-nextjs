@@ -29,11 +29,7 @@ export const NavBarDropDownLink = ({ title, to, icon }) => {
 
   return (
     <Link href={ to } style={ { textDecoration: 'None' } }>
-      <wa-menu-item
-        size="small"
-        appearance={ isActive ? 'filled' : 'plain' }
-        variant={ isActive ? 'brand' : 'neutral' }
-      >
+      <wa-menu-item>
         { icon && <wa-icon slot="prefix" name={ icon } variant="solid"></wa-icon> }
         { title }
       </wa-menu-item>
