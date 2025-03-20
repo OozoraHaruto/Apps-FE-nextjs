@@ -27,7 +27,8 @@ export const NavBar = (showLogin = false) => {
         <NavBarLink title="Portfolio" to="/portfolio" icon="briefcase" />
         <NavBarDropDownContainer title="Tools" prefix="/tools/" icon="screwdriver-wrench">
           <>
-            <NavBarDropDownLink title="JSON Encoder/Decoder" to="/tools/json-helper" />
+            <NavBarDropDownLink title="Password Generator" to="/tools/password-generator" icon="key" />
+            <NavBarDropDownLink title="JSON Encoder/Decoder" to="/tools/json-helper" icon="file-lines" />
           </>
         </NavBarDropDownContainer>
         { user && (<NavBarLink title="Me" to="/me" icon="face-smile" />) }

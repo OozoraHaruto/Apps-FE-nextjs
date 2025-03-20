@@ -1,1 +1,1 @@
-export const app_mobile_breakpoint = "920"
+export const app_mobile_breakpoint = "768"

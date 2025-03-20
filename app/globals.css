@@ -9,6 +9,7 @@ body {
 
 .centerbox {
   min-height: calc(100vh - 180px);
+  max-width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,12 +27,21 @@ body {
 
 .evenlySpreadRow {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   align-items: stretch;
-  align-content: stretch;
   gap: 1rem;
 }
 
 .evenlySpreadRow * {
   flex-grow: 1;
+}
+
+.wordWrapBreakWord {
+  word-wrap: break-word;
+}
+
+/* Web awesome components */
+wa-card {
+  max-width: 100%;
 }
