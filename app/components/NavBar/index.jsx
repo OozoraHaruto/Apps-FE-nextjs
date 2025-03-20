@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { getProfileData } from '@/lib/auth';
 import styles from './index.module.css';
+import NavBarDropDownContainer from './NavBarDropDown';
 import { NavBarDropDownLink, NavBarLink } from './NavBarLink';
 
 export const NavBar = (showLogin = false) => {
@@ -24,6 +25,11 @@ export const NavBar = (showLogin = false) => {
         {/* <span id="brand-name" className="wa-heading-s wa-desktop-only">Audubon Worldwide</span> */ }
         <NavBarLink title="Home" to="/" icon="home" />
         <NavBarLink title="Portfolio" to="/portfolio" icon="briefcase" />
+        <NavBarDropDownContainer title="Tools" prefix="/tools/" icon="screwdriver-wrench">
+          <>
+            <NavBarDropDownLink title="JSON Encoder/Decoder" to="/tools/json-helper" />
+          </>
+        </NavBarDropDownContainer>
         { user && (<NavBarLink title="Me" to="/me" icon="face-smile" />) }
       </div>
       <div className="wa-cluster wa-gap-l">

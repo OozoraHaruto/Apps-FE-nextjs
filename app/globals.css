@@ -23,3 +23,15 @@ body {
   display: flex;
   justify-content: end;
 }
+
+.evenlySpreadRow {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  align-content: stretch;
+  gap: 1rem;
+}
+
+.evenlySpreadRow * {
+  flex-grow: 1;
+}
