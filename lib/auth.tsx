@@ -27,6 +27,14 @@ export interface AuthData {
 export interface AuthDataProfile {
   name: string
   icon: string
+  allowed?: string[]
+}
+
+export interface JWTPayload {
+  id: string
+  auth: string
+  exp: number
+  allowed?: string[]
 }
 
 export const clearAuthStorage = () => {
@@ -82,20 +90,20 @@ export const login = async (username: string, password: string) => {
   return false;
 };
 
-export const validateJWT = async (jwt: string): Promise<boolean> => {
+export const validateJWT = async (jwt: string): Promise<[boolean, string[]]> => {
   if (jwt === '') {
-    return false;
+    return [false, []];
   }
 
   const secret_txt = process.env.AUTH_TOKEN || process.env.NEXT_PUBLIC_AUTH_TOKEN;
   const secret = new TextEncoder().encode(secret_txt)
 
   try {
-    await jwtVerify(jwt, secret)
-    return true;
+    const { payload } = await jwtVerify<JWTPayload>(jwt, secret)
+    return [true, payload.allowed || []];
   } catch (e) {
     console.error(e);
-    return false;
+    return [false, []];
   }
 }
 
@@ -105,7 +113,7 @@ export const getProfileData = async (): Promise<AuthDataProfile | null> => {
     return null;
   }
 
-  const validJWT = await validateJWT(jwt);
+  const [validJWT, allowed] = await validateJWT(jwt);
   if (!validJWT) {
     clearAuthStorage();
     return null;
@@ -122,9 +130,10 @@ export const getProfileData = async (): Promise<AuthDataProfile | null> => {
       refreshToken(jwt);
     }
 
-    const data = {
+    const data: AuthDataProfile = {
       name: localStorage.getItem(LS_NAME) || '',
-      icon: localStorage.getItem(LS_ICON) || ''
+      icon: localStorage.getItem(LS_ICON) || '',
+      allowed: allowed,
     }
     return (data.name && data.icon) ? data : null;
   }
@@ -134,16 +143,19 @@ export const getProfileData = async (): Promise<AuthDataProfile | null> => {
   // refresh token
   try {
     const data = await refreshToken(jwt);
-    if (data) {
-      return data;
+    if (!data) {
+      clearAuthStorage();
+      return null;
     }
-    clearAuthStorage();
+    const rsp = await validateJWT(jwt);
+    data.allowed = validJWT ? rsp[1] : allowed;
+    return data;
   }
   catch (e) {
     console.error(e);
   }
 
-  return null
+  return null;
 }
 
 export const refreshToken = async (jwt: string): Promise<AuthDataProfile | null> => {
