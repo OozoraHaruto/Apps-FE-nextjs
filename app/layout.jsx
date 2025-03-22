@@ -1,4 +1,5 @@
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/react"
 
 import { app_mobile_breakpoint } from '@/lib/constants';
 import "./globals.css";
@@ -21,6 +22,7 @@ export default function RootLayout({
         <wa-page mobile-breakpoint={ app_mobile_breakpoint }>
           { children }
         </wa-page>
+        <Analytics />
       </body>
     </html>
   );
