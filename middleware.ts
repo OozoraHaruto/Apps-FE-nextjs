@@ -11,25 +11,22 @@ export default async function middleware(req: NextRequest) {
   // Check if the current route is protected or public
   const path = req.nextUrl.pathname
   const isProtectedRoute = protectedRoutes.includes(path)
-  const isPublicRoute = protectedRedirectAwayRoutes.includes(path)
+  const isProtectedRedirectAway = protectedRedirectAwayRoutes.includes(path)
 
   // Get jwt
   const jwt = (await cookies()).get(COOKIE_NAME)?.value
 
   // Check if the user is authenticated
-  const userValid = await validateJWT(jwt || '')
+  const [userValid] = await validateJWT(jwt || '')
 
   // Redirect to /login if the user is not authenticated
   if (isProtectedRoute && !userValid) {
-    if (path === '/auth/logout') {
-      return NextResponse.redirect(new URL(`/auth/login`, req.nextUrl))
-    } else {
-      return NextResponse.redirect(new URL(`/auth/login?redirect=${path}`, req.nextUrl))
-    }
+    const rPath = "'/auth/login'" + path === '/auth/logout' ? "" : `?redirect=${path}`
+    return NextResponse.redirect(new URL(rPath, req.nextUrl))
   }
 
-  // 5. Redirect to /dashboard if the user is authenticated
-  if (isPublicRoute && userValid) {
+  // Redirect to /me if the user is authenticated and tries to access routes like /auth/login
+  if (isProtectedRedirectAway && userValid) {
     return NextResponse.redirect(new URL('/me', req.nextUrl))
   }
 
