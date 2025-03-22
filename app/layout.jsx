@@ -1,5 +1,6 @@
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import { app_mobile_breakpoint } from '@/lib/constants';
 import "./globals.css";
@@ -23,6 +24,7 @@ export default function RootLayout({
           { children }
         </wa-page>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
