@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
+import { NextRequest, NextResponse } from 'next/server'
 
 import { COOKIE_NAME, validateJWT } from '@/lib/auth'
 
 // Specify protected and public routes
-const protectedRoutes = ['/me', '/auth/logout']
-const protectedRedirectAwayRoutes = ['/auth/login']
+const protectedRoutes = [ '/me', '/auth/logout' ]
+const protectedRedirectAwayRoutes = [ '/auth/login' ]
 
 export default async function middleware(req: NextRequest) {
   // Check if the current route is protected or public
@@ -17,7 +17,7 @@ export default async function middleware(req: NextRequest) {
   const jwt = (await cookies()).get(COOKIE_NAME)?.value
 
   // Check if the user is authenticated
-  const [userValid] = await validateJWT(jwt || '')
+  const [ userValid, allowedRoutes ] = await validateJWT(jwt || '')
 
   // Redirect to /login if the user is not authenticated
   if (isProtectedRoute && !userValid) {
@@ -30,10 +30,14 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL('/me', req.nextUrl))
   }
 
+  if (path.startsWith("/haruto") && !allowedRoutes.includes("haruto/*") && !allowedRoutes.includes("haruto/appsOfficial")) {
+    return NextResponse.error();
+  }
+
   return NextResponse.next()
 }
 
 // Routes Middleware should not run on
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
+  matcher: [ '/((?!api|_next/static|_next/image|.*\\.png$).*)' ],
 }

@@ -41,6 +41,35 @@ body {
   word-wrap: break-word;
 }
 
+.fullWidthButton {
+  width: 100%;
+}
+
+.SeeMoreContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.SeeMoreContainer > wa-divider {
+  flex-grow: 1;
+}
+
+.pageSectionMaxSizeContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.pageSectionMaxSize {
+  max-width: 1200px;
+  width: 100%;
+}
+
 /* Web awesome components */
 wa-card {
   max-width: 100%;

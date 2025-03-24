@@ -16,3 +16,9 @@ export const apps_portfolio_projects: string = apps_portfolio_base + 'projects';
 export const apps_portfolio_schools: string = apps_portfolio_base + 'schools';
 export const apps_portfolio_skills: string = apps_portfolio_base + 'skills';
 export const apps_portfolio_work: string = apps_portfolio_base + 'work';
+
+// portfolio
+const apps_home_base: string = apps_base_url + 'home/';
+export const apps_home_apps: string = apps_home_base + 'apps';
+export const apps_home_apps_official: string = apps_home_base + 'appsOfficial';
+export const apps_home_product_keys: string = apps_home_base + 'productKeys';

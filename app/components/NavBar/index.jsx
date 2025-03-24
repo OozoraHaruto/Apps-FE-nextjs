@@ -13,6 +13,7 @@ export const NavBar = (showLogin = false) => {
   useEffect(() => {
     getProfileData().then((profile) => {
       setUser(profile);
+      console.log(profile)
     }).catch((error) => {
       console.error(error);
     });
@@ -31,7 +32,7 @@ export const NavBar = (showLogin = false) => {
             <NavBarDropDownLink title="JSON Encoder/Decoder" to="/tools/json-helper" icon="file-lines" />
           </>
         </NavBarDropDownContainer>
-        { user && (<NavBarLink title="Me" to="/me" icon="face-smile" />) }
+        { user && (user.allowed.includes("haruto/*") || user.allowed.includes("haruto/appsOfficial")) && (<NavBarLink title="はると" to="/haruto" icon="face-dizzy" />) }
       </div>
       <div className="wa-cluster wa-gap-l">
         { showLogin === true && user && (
