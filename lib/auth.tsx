@@ -2,6 +2,7 @@ import md5 from 'crypto-js/md5';
 import sha3 from 'crypto-js/sha3';
 import { jwtVerify } from 'jose';
 
+import { logDebug } from '@/lib/helpers';
 import { apps_auth_login, apps_auth_refresh } from "@/lib/urls";
 import { getCookie } from './cookies';
 
@@ -16,7 +17,9 @@ const COOKIE_EXPIRE = 3 * 24 * 60 * 60 * 1000; // 3 days
 
 
 export const encryptPassword = (password: string) => {
-  return sha3(md5(password), { outputLength: 384 }).toString();
+  const encPass = sha3(md5(password), { outputLength: 384 }).toString();
+  logDebug(encPass)
+  return encPass
 };
 
 export interface AuthData {
@@ -90,9 +93,9 @@ export const login = async (username: string, password: string) => {
   return false;
 };
 
-export const validateJWT = async (jwt: string): Promise<[boolean, string[]]> => {
+export const validateJWT = async (jwt: string): Promise<[ boolean, string[] ]> => {
   if (jwt === '') {
-    return [false, []];
+    return [ false, [] ];
   }
 
   const secret_txt = process.env.AUTH_TOKEN || process.env.NEXT_PUBLIC_AUTH_TOKEN;
@@ -100,10 +103,10 @@ export const validateJWT = async (jwt: string): Promise<[boolean, string[]]> => 
 
   try {
     const { payload } = await jwtVerify<JWTPayload>(jwt, secret)
-    return [true, payload.allowed || []];
+    return [ true, payload.allowed || [] ];
   } catch (e) {
     console.error(e);
-    return [false, []];
+    return [ false, [] ];
   }
 }
 
@@ -113,7 +116,7 @@ export const getProfileData = async (): Promise<AuthDataProfile | null> => {
     return null;
   }
 
-  const [validJWT, allowed] = await validateJWT(jwt);
+  const [ validJWT, allowed ] = await validateJWT(jwt);
   if (!validJWT) {
     clearAuthStorage();
     return null;
@@ -148,7 +151,7 @@ export const getProfileData = async (): Promise<AuthDataProfile | null> => {
       return null;
     }
     const rsp = await validateJWT(jwt);
-    data.allowed = validJWT ? rsp[1] : allowed;
+    data.allowed = validJWT ? rsp[ 1 ] : allowed;
     return data;
   }
   catch (e) {
