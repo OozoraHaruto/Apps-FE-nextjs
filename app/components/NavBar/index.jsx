@@ -7,7 +7,7 @@ import styles from './index.module.css';
 import NavBarDropDownContainer from './NavBarDropDown';
 import { NavBarDropDownLink, NavBarLink } from './NavBarLink';
 
-export const NavBar = (showLogin = false) => {
+export const NavBar = ({ showLogin = false }) => {
   const [ user, setUser ] = useState(null);
 
   useEffect(() => {
