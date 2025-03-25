@@ -1,19 +1,20 @@
 import { cookies } from 'next/headers';
 
+import { WAVariant } from "@/app/components/webawesome";
 import { COOKIE_NAME } from '@/lib/auth';
 import { apps_home_apps, apps_home_apps_official } from "@/lib/urls";
 
-declare interface HomeApp {
+export declare interface HomeApp {
   name: string;
   image: string;
   links: HomeAppLink[];
   hiddenLinks?: HomeAppLink[];
 }
 
-declare interface HomeAppLink {
+export declare interface HomeAppLink {
   name: string;
   url: string;
-  color: string;
+  color: WAVariant | "";
 }
 
 export const getApps = async (): Promise<readonly HomeApp[] | null> => {

@@ -1,11 +1,12 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
+import NavBar from '@/app/components/NavBar';
+import { WAButton, WACard, WAInput, WAStyleStack } from '@/app/components/webawesome';
 import { login } from '@/lib/auth';
 import { getSearchParams } from '@/lib/helpers';
-import NavBar from '../../components/NavBar';
 
 export default function Login() {
   const router = useRouter();
@@ -30,36 +31,26 @@ export default function Login() {
     });
   };
 
-  useEffect(() => {
-    document.getElementById("username").addEventListener('input', e => {
-      setUsername(e.target.value)
-    });
-    document.getElementById("password").addEventListener('input', e => {
-      setPassword(e.target.value)
-    });
-  }, []);
-
-
   return (
     <>
       <title>Login</title>
       <meta name="description" content="Login to Haruto Apps" />
       <NavBar />
       <main className="centerbox">
-        <wa-card>
+        <WACard>
           <form className="input-validation-type input-validation-custom" onSubmit={ (event) => {
             event.preventDefault();
             checkPassword();
           } }>
-            <wa-input id="username" label="Username/E-mail" autofocus value={ username } required></wa-input>
-            <br />
-            <wa-input type="password" id="password" label="Password" passwordToggle value={ password } required></wa-input>
-            <br />
-            <wa-button type="submit" variant="brand" loading={ loading }>Submit</wa-button>
-            <wa-button type="reset" variant="neutral" loading={ loading }>Reset</wa-button>
+            <WAStyleStack>
+              <WAInput id="username" label="Username/E-mail" value={ username } onChange={ setUsername } autofocus required />
+              <WAInput type="password" id="password" label="Password" value={ password } onChange={ setPassword } required />
+              <WAButton type="submit" variant="brand" loading={ loading }>Submit</WAButton>
+              <WAButton type="reset" variant="neutral" loading={ loading }>Reset</WAButton>
+            </WAStyleStack>
           </form>
-        </wa-card>
-      </main>
+        </WACard>
+      </main >
     </>
   );
 }

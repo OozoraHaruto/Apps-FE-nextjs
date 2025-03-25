@@ -1,6 +1,7 @@
+import React from 'react';
 import { getProductKeys } from './lib/productKeys';
 
-const TableWrapper = ({ title, children }) => (
+const TableWrapper = ({ title, children }: { title: string; children: React.ReactElement }) => (
   <table className="wa-zebra-rows">
     <caption>{ title }</caption>
     <thead>

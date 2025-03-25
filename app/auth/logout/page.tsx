@@ -11,7 +11,7 @@ export default function Logout() {
   useEffect(() => {
     clearAuthStorage();
     router.push('/');
-  }, []);
+  }, [ router ]);
 
   return (
     <main className="centerbox">

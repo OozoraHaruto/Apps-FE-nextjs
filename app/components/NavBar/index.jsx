@@ -35,7 +35,7 @@ export const NavBar = (showLogin = false) => {
         { user && (user.allowed.includes("haruto/*") || user.allowed.includes("haruto/appsOfficial")) && (<NavBarLink title="はると" to="/haruto" icon="face-dizzy" />) }
       </div>
       <div className="wa-cluster wa-gap-l">
-        { showLogin === true && user && (
+        { showLogin === true && !user && (
           <NavBarLink title="Login" to="/auth/login" icon="right-to-bracket" />
         ) }
         {

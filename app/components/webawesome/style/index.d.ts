@@ -1,0 +1,2 @@
+export declare type WAAlignItems = "wa-align-items-start" | "wa-align-items-end" | "wa-align-items-center" | "wa-align-items-stretch" | "wa-align-items-baseline";
+export declare type WAGap = "wa-gap-0" | "wa-gap-3xs" | "wa-gap-2xs" | "wa-gap-xs" | "wa-gap-s" | "wa-gap-m" | "wa-gap-l" | "wa-gap-xl" | "wa-gap-2xl" | "wa-gap-3xl";
