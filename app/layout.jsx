@@ -2,7 +2,7 @@ import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
-import { app_mobile_breakpoint } from '@/lib/constants';
+import { app_mobile_breakpoint, isDebug } from '@/lib/constants';
 import "./globals.css";
 
 export default function RootLayout({
@@ -23,8 +23,12 @@ export default function RootLayout({
         <wa-page mobile-breakpoint={ app_mobile_breakpoint }>
           { children }
         </wa-page>
-        <Analytics />
-        <SpeedInsights />
+        {
+          !isDebug && <>
+            <Analytics />
+            <SpeedInsights />
+          </>
+        }
       </body>
     </html>
   );
