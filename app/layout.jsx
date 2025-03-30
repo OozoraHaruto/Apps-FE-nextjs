@@ -11,12 +11,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.11/dist/styles/webawesome.css" />
-        <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.11/dist/styles/themes/active.css" />
-        <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.11/dist/styles/themes/awesome/color.css" />
-        <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.11/dist/styles/color/bright.css" />
-        <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.11/dist/styles/themes/playful/typography.css" />
-        <Script type="module" crossOrigin='anonymous' src="https://early.webawesome.com/webawesome@3.0.0-alpha.11/dist/webawesome.loader.js" />
+        <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.12/dist/styles/webawesome.css" />
+        <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.12/dist/styles/themes/active.css" />
+        <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.12/dist/styles/themes/awesome/color.css" />
+        <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.12/dist/styles/color/bright.css" />
+        <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.12/dist/styles/themes/playful/typography.css" />
+        <Script type="module" crossOrigin='anonymous' src="https://early.webawesome.com/webawesome@3.0.0-alpha.12/dist/webawesome.loader.js" />
       </head>
       <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
