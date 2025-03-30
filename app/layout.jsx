@@ -1,3 +1,5 @@
+"use client"
+
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
@@ -5,11 +7,20 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import { app_mobile_breakpoint, isDebug } from '@/lib/constants';
 import "./globals.css";
 
+const getBrowserTheme = () => {
+  try {
+    const mql = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+    return mql && mql.matches ? 'dark' : 'light';
+  } catch { }
+
+  return "dark"
+};
+
 export default function RootLayout({
   children,
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`wa-${getBrowserTheme()}`}>
       <head>
         <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.12/dist/styles/webawesome.css" />
         <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.12/dist/styles/themes/active.css" />
