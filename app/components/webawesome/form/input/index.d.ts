@@ -1,9 +1,9 @@
 export interface WAFormInputProps {
   id: string;
-  label: string;
   value: string;
   onChange: Dispatch<SetStateAction<string>>;
   placeholder?: string | undefined;
+  label?: string;
   hint?: string | undefined;
   type?: string | undefined;
   clearable?: boolean | undefined;

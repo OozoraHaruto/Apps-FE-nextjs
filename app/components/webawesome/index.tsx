@@ -2,14 +2,20 @@ export declare type WAVariant = 'neutral' | 'brand' | 'success' | 'warning' | 'd
 export declare type WAAppearance = 'accent' | 'filled' | 'outlined' | 'plain';
 export declare type WASize = 'small' | 'medium' | 'large' | 'inherit';
 
-// Components
+export declare type WAIconFamily = "classic" | "sharp" | "duotone" | "brands"
+export declare type WAIconVariant = "thin" | "light" | "regular" | "solid"
+
 export { default as WAButton } from './components/button';
 export { default as WACard } from './components/card';
+export { default as WAIcon } from './components/icon';
+export { default as WAIconButton } from './components/iconButton';
 
 // Form
 export { default as WAInput } from './form/input';
+export { default as WASelect } from './form/select';
 
 // Styles
+export { default as WAStyleFlank } from './style/flank';
 export { default as WAStyleGrid } from './style/grid';
 export { default as WAStyleStack } from './style/stack';
 

@@ -32,6 +32,11 @@ export const NavBar = ({ showLogin = false }) => {
             <NavBarDropDownLink title="JSON Encoder/Decoder" to="/tools/json-helper" icon="file-lines" />
           </>
         </NavBarDropDownContainer>
+        <NavBarDropDownContainer title="Recipea" prefix="/recipea" icon="kitchen-set">
+          <>
+            <NavBarDropDownLink title="Add" to="/recipea/add" icon="file-circle-plus" />
+          </>
+        </NavBarDropDownContainer>
         { user && (user.allowed.includes("haruto/*") || user.allowed.includes("haruto/appsOfficial")) && (<NavBarLink title="はると" to="/haruto" icon="face-dizzy" />) }
       </div>
       <div className="wa-cluster wa-gap-l">

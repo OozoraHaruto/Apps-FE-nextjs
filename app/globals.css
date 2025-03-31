@@ -5,10 +5,22 @@ body {
   margin: 0;
 }
 
+/* :host {
+  height: fit-content;
+} */
+
 /* Shared quick classes */
 
 .centerbox {
   min-height: calc(100vh - 180px);
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centersmallbox {
+  min-height: 100%;
   max-width: 100%;
   display: flex;
   align-items: center;
