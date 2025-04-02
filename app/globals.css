@@ -41,11 +41,11 @@ body {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  align-items: stretch;
+  /* align-items: stretch; */
   gap: 1rem;
 }
 
-.evenlySpreadRow * {
+.evenlySpreadRow > * {
   flex-grow: 1;
 }
 
@@ -61,7 +61,6 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: stretch;
   gap: 10px;
 }
 

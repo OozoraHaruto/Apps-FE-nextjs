@@ -1,4 +1,4 @@
-import { WAIconVariant, WAIconFamily } from "../..";
+import { WAIconFamily, WAIconVariant } from "../..";
 
 export interface WAComponentIconProps {
   name: string;

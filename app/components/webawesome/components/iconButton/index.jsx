@@ -12,16 +12,16 @@ export default function WAComponentIconButton({
 }) {
   return (
     <wa-icon-button
-      name = {name}
-      family = {family}
-      variant = {variant}
-      src = {src}
-      label = {label}
-      library = {library}
-      disabled = {disabled}
-      href = {href}
-      target = {target}
-      onClick = {onClick}
+      name={ name }
+      family={ family }
+      variant={ variant }
+      src={ src }
+      label={ label }
+      library={ library }
+      disabled={ disabled }
+      href={ href }
+      target={ target }
+      onClick={ onClick }
     ></wa-icon-button>
   )
 }

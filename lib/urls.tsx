@@ -22,3 +22,7 @@ const apps_home_base: string = apps_base_url + 'home/';
 export const apps_home_apps: string = apps_home_base + 'apps';
 export const apps_home_apps_official: string = apps_home_base + 'appsOfficial';
 export const apps_home_product_keys: string = apps_home_base + 'productKeys';
+
+// recipea
+const apps_recipea: string = apps_base_url + 'recipea/';
+export const apps_recipea_recipe: string = apps_recipea + 'recipe';
