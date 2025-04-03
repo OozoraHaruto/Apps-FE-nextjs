@@ -19,6 +19,7 @@ export { default as WASelect } from './form/select';
 export { default as WATextArea } from './form/textarea';
 
 // Styles
+export { default as WAStyleCluster } from './style/cluster';
 export { default as WAStyleFlank } from './style/flank';
 export { default as WAStyleGrid } from './style/grid';
 export { default as WAStyleStack } from './style/stack';

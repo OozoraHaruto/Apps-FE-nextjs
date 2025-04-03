@@ -1,10 +1,13 @@
 "use client";
 
+import { Cloudinary } from '@cloudinary/url-gen';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
 
+import Uploader from '@/app/components/Cloudinary/Uploader';
 import NavBar from '@/app/components/NavBar';
-import { WAButton, WACard, WACopyButton, WAIcon, WAIconButton, WAInput, WASelect, WAStyleFlank, WAStyleStack, WATextArea } from '@/app/components/webawesome';
+import { WAButton, WACard, WACopyButton, WAIcon, WAIconButton, WAInput, WASelect, WAStyleCluster, WAStyleFlank, WAStyleStack, WATextArea } from '@/app/components/webawesome';
 import * as recipeLib from "../lib/recipe";
 
 const stepTitle = [
@@ -13,6 +16,37 @@ const stepTitle = [
   "Steps",
   "Finalize recipe",
 ]
+
+// Cloudinary configuration
+const cld = new Cloudinary({
+  cloud: {
+    cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  },
+});
+
+// https://cloudinary.com/documentation/upload_widget_reference#parameters
+const uwConfigRecipeImage = {
+  cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  uploadPreset: process.env.NEXT_PUBLIC_UPLOAD_PRESET,
+  cropping: true,
+  sources: [ 'local', 'url', 'google_drive', 'dropbox', 'camera' ],
+  folder: "apps/recipea",
+  resourceType: 'image',
+  maxImageWidth: 1000,
+  multiple: false,
+  croppingAspectRatio: 1,
+};
+
+const uwConfigRecipeStepImage = {
+  ...uwConfigRecipeImage,
+  croppingAspectRatio: null,
+}
+
+const imageCSS: React.CSSProperties = {
+  position: "relative",
+  width: "100px",
+  height: "100px",
+}
 
 export default function Page() {
   const router = useRouter();
@@ -38,16 +72,16 @@ export default function Page() {
 
   useEffect(() => {
     const i = recipeLib.createEmptyIngredientsAll()
-    ingredientsAll.push(i)
-    setIngredientsAll([ ...ingredientsAll ])
+    setIngredientsAll([ i ])
 
     // Add to stepIng
-    stepIng[ i.ingredients[ 0 ].uiStepIngredientID ] = {
+    const si: { [ key: string ]: recipeLib.StepIngredients } = {}
+    si[ i.ingredients[ 0 ].uiStepIngredientID ] = {
       group_id: i.uuid,
       ingredient_id: i.ingredients[ 0 ].uuid,
       percentage: 100
     }
-    setStepIng({ ...stepIng })
+    setStepIng(si)
   }, []);
 
   const editIngredient = (allIndex: number, ingIndex: number, name?: string, quantity?: string, unit?: string) => {
@@ -130,7 +164,12 @@ export default function Page() {
       step.description = description
     }
     if (image) {
-      step.images = [ image ]
+      console.log("Image", image)
+      if (step.images) {
+        step.images.push(image)
+      } else {
+        step.images = [ image ]
+      }
     }
 
     stepsAll[ allIndex ] = ingAll
@@ -249,7 +288,13 @@ export default function Page() {
                     </div>
                     <WAInput id="crusine" label="Crusine" value={ crusine } onChange={ setCrusine } />
                     <WAInput id="source" label="Source" value={ source } onChange={ setSource } type='url' />
-                    <WAInput id="image" label="Image" value={ image } onChange={ setImage } type='url' />
+                    { image && <div style={ imageCSS }><Image
+                      src={ cld.image(image).toURL() }
+                      alt={ `Image of ${name}` }
+                      objectFit='contain'
+                      fill
+                    /></div> }
+                    <Uploader uwConfig={ uwConfigRecipeImage } setPublicId={ setImage } />
                     <WAInput id="video" label="Video" value={ video } onChange={ setVideo } type='url' />
                   </WAStyleStack> : step === 2 ? <WAStyleStack>
                     {
@@ -327,8 +372,15 @@ export default function Page() {
                                     <WAStyleStack>
                                       <WATextArea id={ `step_${i}_${j}_description` } value={ s.description } placeholder="Step" onChange={ (val: string) => { editStep(i, j, val) } } />
                                       {
-                                        s.images && <WAInput id={ `step_${i}_${j}_image` } value={ s.images[ 0 ] } placeholder="Image" type='url' onChange={ (val: string) => { editStep(i, j, undefined, val) } } />
+                                        s.images && <WAStyleCluster>{
+                                          s.images.map((image, k) => (
+                                            <div key={ `step_${i}_${j}_${k}_image` } style={ imageCSS }>
+                                              <Image src={ cld.image(image).toURL() } alt={ `Image of ${name}` } objectFit='contain' fill />
+                                            </div>
+                                          )) }
+                                        </WAStyleCluster>
                                       }
+                                      <Uploader uwConfig={ uwConfigRecipeStepImage } setPublicId={ (val: string) => editStep(i, j, undefined, val) } />
                                     </WAStyleStack>
                                     <div>
                                       <WAIconButton name='plus' onClick={ () => addEmptyStep(i, j) } />

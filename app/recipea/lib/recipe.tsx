@@ -9,26 +9,30 @@ import { apps_recipea_recipe } from '@/lib/urls';
 
 export const UUID_REGEX_IN_DESC = /\{\{[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\}\}/g
 
-export declare interface Recipe {
+
+export declare interface RecipeSummary {
     id?: string;
     creator_id?: string;
     name: string;
     description?: string;
-    source?: string;
     image?: string;
-    video?: string;
-    servings: number;
     prepTime: number;
     cookTime: number;
     marinateTime: number;
-    privacy: "public" | "private" | "draft" | "share_with_link";
     course: "main_course" | "appetizers" | "desert" | "drinks" | "snacks";
     crusine: string;
-    ingredients_all: IngredientsAll[];
-    steps_all: StepsAll[];
     created_at: string;
     modified_at: string;
     creator: AuthDataProfile;
+}
+
+export declare interface Recipe extends RecipeSummary {
+    source?: string;
+    video?: string;
+    servings: number;
+    privacy: "public" | "private" | "draft" | "share_with_link";
+    ingredients_all: IngredientsAll[];
+    steps_all: StepsAll[];
 }
 
 export declare interface Ingredient {
@@ -76,6 +80,14 @@ export const createEmptyIngredientsAll = () => {
     return { name: "", uuid: uuidv4(), ingredients: [ createEmptyIngredientsAllIngredient() ] }
 }
 
+export const createEmptyStepsAll = () => {
+    return { name: "", steps: [ createEmptyStepsAllStep() ] }
+}
+
+export const createEmptyStepsAllStep = () => {
+    return { description: "", images: [], ingredients: {} }
+}
+
 export const ingredientAsText = (ing: Ingredient, percentage: number = 100) => {
     if (ing.name == "") {
         return ""
@@ -90,14 +102,6 @@ export const ingredientAsText = (ing: Ingredient, percentage: number = 100) => {
     } else {
         return `${ing.name} as needed`
     }
-}
-
-export const createEmptyStepsAll = () => {
-    return { name: "", steps: [ createEmptyStepsAllStep() ] }
-}
-
-export const createEmptyStepsAllStep = () => {
-    return { description: "", images: [], ingredients: {} }
 }
 
 export const find_group_ing = (group_id: string, ing_id: string, ingredientsAll: IngredientsAll[]): [ string, Ingredient | undefined ] => {
@@ -170,6 +174,36 @@ export const addRecipe = async (r: Recipe): Promise<string | undefined | null> =
     if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
     }
+}
+
+export const getRecipes = async (): Promise<readonly RecipeSummary[] | null> => {
+    const jwt = getCookie(COOKIE_NAME);
+    const reqHeader: HeadersInit = { "Content-Type": "application/json" };
+    if (jwt) {
+        reqHeader[ "Authorization" ] = `Bearer ${jwt}`
+    }
+
+    const response = await fetch(apps_recipea_recipe, {
+        method: "GET",
+        headers: reqHeader,
+    })
+
+    const rsp_json = await response.json();
+    if (!rsp_json) {
+        throw new Error(`Response status: ${response.status}`);
+    }
+
+    if (rsp_json.success === true && rsp_json.data) {
+        return rsp_json.data;
+    } else if (rsp_json.success === false && rsp_json.error) {
+        throw new Error(`${rsp_json.error.code}: ${rsp_json.error.additionalInformation ?? rsp_json.error.description}`)
+    }
+
+    if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+    }
+
+    throw new Error("Failed to get any data");
 }
 
 
