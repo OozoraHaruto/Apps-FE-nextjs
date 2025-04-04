@@ -206,6 +206,36 @@ export const getRecipes = async (): Promise<readonly RecipeSummary[] | null> => 
     throw new Error("Failed to get any data");
 }
 
+export const getRecipe = async (recipeID: string): Promise<Recipe | null> => {
+    const jwt = getCookie(COOKIE_NAME);
+    const reqHeader: HeadersInit = { "Content-Type": "application/json" };
+    if (jwt) {
+        reqHeader[ "Authorization" ] = `Bearer ${jwt}`
+    }
+
+    const response = await fetch(`${apps_recipea_recipe}/${recipeID}`, {
+        method: "GET",
+        headers: reqHeader,
+    })
+
+    const rsp_json = await response.json();
+    if (!rsp_json) {
+        throw new Error(`Response status: ${response.status}`);
+    }
+
+    if (rsp_json.success === true && rsp_json.data) {
+        return rsp_json.data;
+    } else if (rsp_json.success === false && rsp_json.error) {
+        throw new Error(`${rsp_json.error.code}: ${rsp_json.error.additionalInformation ?? rsp_json.error.description}`)
+    }
+
+    if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+    }
+
+    throw new Error("Failed to get any data");
+}
+
 
 
 export const createTestIng = () => {
