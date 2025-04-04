@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { WACard, WAStyleGrid } from '@/app/components/webawesome';
+import * as cloudinaryHelper from "../lib/cloudinary";
 import { getRecipes, RecipeSummary } from '../lib/recipe';
 
 
@@ -32,14 +33,13 @@ export default function Page() {
                 {
                   recipe.image && <Image
                     slot="image"
-                    src={ `https://res.cloudinary.com/duxmjjxns/image/upload/t_recipea-recipe-image/${recipe.image}` }
+                    src={ cloudinaryHelper.getTransfromationURL(cloudinaryHelper.main_logo_trans, recipe.id ?? "", recipe.image) }
                     alt={ `Image of ${recipe.name}` }
                     sizes="100vw"
                     width={ 300 }
                     height={ 300 }
                   />
                 }
-
 
                 <h3>{ recipe.name }</h3>
                 <small>{ recipe.modified_at }</small>

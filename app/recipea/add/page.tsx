@@ -8,6 +8,7 @@ import { Fragment, useEffect, useState } from 'react';
 import Uploader from '@/app/components/Cloudinary/Uploader';
 import NavBar from '@/app/components/NavBar';
 import { WAButton, WACard, WACopyButton, WAIcon, WAIconButton, WAInput, WASelect, WAStyleCluster, WAStyleFlank, WAStyleStack, WATextArea } from '@/app/components/webawesome';
+import { logDebug } from '@/lib/helpers';
 import * as recipeLib from "../lib/recipe";
 
 const stepTitle = [
@@ -229,7 +230,7 @@ export default function Page() {
     recipe.ingredients_all = ingredientsAll
     recipe.steps_all = sa
 
-    console.log("recipe", recipe)
+    logDebug("recipe JSON", JSON.stringify(recipe))
     recipeLib.addRecipe(recipe).then((id) => {
       setLoading(false);
       if (id) {
