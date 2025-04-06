@@ -14,7 +14,7 @@ export interface WAComponentButtonProps {
   href?: string;
   target?: '_blank' | '_parent' | '_self' | '_top';
   rel?: string | undefined;
-  onClick?: undefined;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   children: any;
 }
 

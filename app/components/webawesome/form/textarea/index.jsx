@@ -36,7 +36,7 @@ export function WAFormInput({
   }, []);
 
   return (
-    <wa-input
+    <wa-textarea
       id={ id }
       label={ label }
       type={ type }
@@ -52,7 +52,7 @@ export function WAFormInput({
       style={ style }
     >
       { children }
-    </wa-input>
+    </wa-textarea>
   )
 }
 
