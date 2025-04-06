@@ -27,11 +27,16 @@ export const NavBar = ({ showLogin = false }) => {
         <NavBarLink title="Home" to="/" icon="home" />
         <NavBarLink title="Portfolio" to="/portfolio" icon="briefcase" />
         <NavBarDropDownContainer title="Tools" prefix="/tools/" icon="screwdriver-wrench">
-          <>
-            <NavBarDropDownLink title="Password Generator" to="/tools/password-generator" icon="key" />
-            <NavBarDropDownLink title="JSON Encoder/Decoder" to="/tools/json-helper" icon="file-lines" />
-          </>
+          <NavBarDropDownLink title="Password Generator" to="/tools/password-generator" icon="key" />
+          <NavBarDropDownLink title="JSON Encoder/Decoder" to="/tools/json-helper" icon="file-lines" />
         </NavBarDropDownContainer>
+        {
+          user ? <NavBarDropDownContainer title="Recipea" prefix="/recipea" icon="kitchen-set">
+            <NavBarDropDownLink title="View" to="/recipea" icon="grip" />
+            <NavBarDropDownLink title="Add" to="/recipea/add" icon="file-circle-plus" />
+          </NavBarDropDownContainer> : <NavBarLink title="Recipea" to="/recipea" icon="kitchen-set" />
+        }
+
         { user && (user.allowed.includes("haruto/*") || user.allowed.includes("haruto/appsOfficial")) && (<NavBarLink title="はると" to="/haruto" icon="face-dizzy" />) }
       </div>
       <div className="wa-cluster wa-gap-l">
