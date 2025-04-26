@@ -86,20 +86,23 @@ export default function Page() {
   }, []);
 
   const editIngredient = (allIndex: number, ingIndex: number, name?: string, quantity?: string, unit?: string) => {
-    const ingAll = ingredientsAll[ allIndex ]
-    const ing = ingAll.ingredients[ ingIndex ]
-    if (name) {
-      ing.name = name
-    }
-    if (quantity) {
-      ing.quantity = Number(quantity)
-    }
-    if (unit) {
-      ing.unit = unit
-    }
+    setIngredientsAll(prevIngAll => {
+      const ingAll = prevIngAll
+      const ing = ingAll[ allIndex ].ingredients[ ingIndex ]
+      if (name) {
+        ing.name = name
+      }
+      if (quantity) {
+        ing.quantity = Number(quantity)
+      }
+      if (unit) {
+        ing.unit = unit
+      }
+      console.log("length of ingAll editIngredient", ingAll.length)
 
-    ingredientsAll[ allIndex ] = ingAll
-    setIngredientsAll([ ...ingredientsAll ])
+      ingAll[ allIndex ].ingredients[ ingIndex ] = ing
+      return ingAll
+    })
   }
 
   const addEmptyIngredient = (allIndex: number, ingIndex: number) => {
@@ -159,22 +162,26 @@ export default function Page() {
   }
 
   const editStep = (allIndex: number, idvIndex: number, description?: string, image?: string) => {
-    const ingAll = stepsAll[ allIndex ]
-    const step = ingAll.steps[ idvIndex ]
-    if (description) {
-      step.description = description
-    }
-    if (image) {
-      console.log("Image", image)
-      if (step.images) {
-        step.images.push(image)
-      } else {
-        step.images = [ image ]
+    setStepsAll(prevStepAll => {
+      const sAll = prevStepAll
+      const ingAll = sAll[ allIndex ]
+      const step = ingAll.steps[ idvIndex ]
+      if (description) {
+        step.description = description
       }
-    }
+      if (image) {
+        console.log("Image", image)
+        if (step.images) {
+          step.images.push(image)
+        } else {
+          step.images = [ image ]
+        }
+      }
 
-    stepsAll[ allIndex ] = ingAll
-    setStepsAll([ ...stepsAll ])
+      sAll[ allIndex ] = ingAll
+
+      return sAll
+    })
   }
 
   const addEmptyStep = (allIndex: number, ingIndex: number) => {
@@ -308,7 +315,7 @@ export default function Page() {
                               ingAll.ingredients.map((ing: recipeLib.Ingredient, j) => (
                                 <WAStyleFlank key={ `ing-${i}-${j}` } end>
                                   <div className='evenlySpreadRow'>
-                                    <div><WAInput id={ `ingQuantity-${i}-${j}` } placeholder="Quantity" value={ `${ing.quantity}` } onChange={ (val: string) => editIngredient(i, j, undefined, val) } type='number' /></div>
+                                    <div><WAInput id={ `ingQuantity-${i}-${j}` } placeholder="Quantity" value={ `${ing.quantity}` } onChange={ (val: string) => editIngredient(i, j, undefined, val, undefined) } type='number' /></div>
                                     <div><WAInput id={ `ingUnit-${i}-${j}` } placeholder="Unit" value={ `${ing.unit ?? ""}` } onChange={ (val: string) => editIngredient(i, j, undefined, undefined, val) } /></div>
                                     <div style={ { flexGrow: 6 } }><WAInput id={ `ingName-${i}-${j}` } placeholder="Ingredient" value={ ing.name } onChange={ (val: string) => editIngredient(i, j, val) } /></div>
                                   </div>
@@ -371,7 +378,7 @@ export default function Page() {
                                 sa.steps.map((s, j) => (
                                   <WAStyleFlank key={ `step-${i}-${j}` } end>
                                     <WAStyleStack>
-                                      <WATextArea id={ `step_${i}_${j}_description` } value={ s.description } placeholder="Step" onChange={ (val: string) => { editStep(i, j, val) } } />
+                                      <WATextArea id={ `step_${i}_${j}_description` } value={ s.description } placeholder="Step" onChange={ (val: string) => { editStep(i, j, val, undefined) } } />
                                       {
                                         s.images && <WAStyleCluster>{
                                           s.images.map((image, k) => (
@@ -450,7 +457,7 @@ export default function Page() {
                         Previous
                       </WAButton> : <div></div>
                     }
-                    <div className='centersmallbox'><div style={ { textAlign: "center" } }>{ step }/{ stepsAll.length }</div></div>
+                    <div className='centersmallbox'><div style={ { textAlign: "center" } }>{ step }/{ stepTitle.length }</div></div>
                     {
                       step != stepTitle.length ? <WAButton type="button" variant="brand" onClick={ () => setStep(step + 1) }>
                         <WAIcon name="chevron-right" slot="suffix" />
