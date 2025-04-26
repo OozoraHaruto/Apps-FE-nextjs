@@ -31,10 +31,10 @@ export const NavBar = ({ showLogin = false }) => {
           <NavBarDropDownLink title="JSON Encoder/Decoder" to="/tools/json-helper" icon="file-lines" />
         </NavBarDropDownContainer>
         {
-          user ? <NavBarDropDownContainer title="Recipea" prefix="/recipea" icon="kitchen-set">
+          user && <NavBarDropDownContainer title="Recipea" prefix="/recipea" icon="kitchen-set">
             <NavBarDropDownLink title="View" to="/recipea" icon="grip" />
             <NavBarDropDownLink title="Add" to="/recipea/add" icon="file-circle-plus" />
-          </NavBarDropDownContainer> : <NavBarLink title="Recipea" to="/recipea" icon="kitchen-set" />
+          </NavBarDropDownContainer>
         }
 
         { user && (user.allowed.includes("haruto/*") || user.allowed.includes("haruto/appsOfficial")) && (<NavBarLink title="はると" to="/haruto" icon="face-dizzy" />) }
