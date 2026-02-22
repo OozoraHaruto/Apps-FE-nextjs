@@ -5,6 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 
 import { app_mobile_breakpoint, isDebug } from '@/lib/constants';
+
 import "./globals.css";
 
 const getBrowserTheme = () => {
@@ -22,12 +23,7 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning lang="en" className={ `wa-${getBrowserTheme()}` }>
       <head>
-        <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.12/dist/styles/webawesome.css" />
-        <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.12/dist/styles/themes/active.css" />
-        <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.12/dist/styles/themes/awesome/color.css" />
-        <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.12/dist/styles/color/bright.css" />
-        <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.12/dist/styles/themes/playful/typography.css" />
-        <Script type="module" crossOrigin='anonymous' src="https://early.webawesome.com/webawesome@3.0.0-alpha.12/dist/webawesome.loader.js" />
+        <Script src="https://kit.webawesome.com/1b89132143c1414e.js" crossorigin="anonymous"></Script>
         <Script type="text/javascript" src="https://upload-widget.cloudinary.com/latest/global/all.js" />
       </head>
       <body>
