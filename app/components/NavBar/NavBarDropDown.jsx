@@ -17,12 +17,12 @@ export const Wrapper = ({ title, prefix, children, icon }) => {
         size="small"
         caret
       >
-        { icon && <wa-icon slot="prefix" name={ icon } variant="solid"></wa-icon> }
+        { icon && <wa-icon slot="start" name={ icon } variant="solid"></wa-icon> }
         { title }
       </wa-button>
-      <wa-menu>
+      <>
         { children }
-      </wa-menu>
+      </>
     </wa-dropdown>
   )
 };

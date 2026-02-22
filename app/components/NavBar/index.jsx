@@ -51,7 +51,7 @@ export const NavBar = ({ showLogin = false }) => {
                   image={ user.icon }
                   label="User's avatar"
                   loading="lazy"
-                  slot="prefix"
+                  slot="start"
                   id={ styles.navUserAvatar }
                 ></wa-avatar>
                 <span>{ user.name }</span>

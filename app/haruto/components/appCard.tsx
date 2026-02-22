@@ -29,9 +29,9 @@ export default function AppCard({ ownKey, app }: { ownKey: string; app: HomeApp 
   const [ seeMore, setSeeMore ] = useState(false)
 
   return (
-    <WACard withImage overview>
+    <WACard overview>
       <img
-        slot="image"
+        slot="media"
         src={ imageLink(app.image) }
       />
 

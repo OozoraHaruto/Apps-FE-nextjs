@@ -33,7 +33,7 @@ export default async function Profile() {
               <div slot="footer" className='justifyEnd'>
                 <Link href="/auth/logout">
                   <wa-button variant="danger" appearance="outlined">
-                    <wa-icon slot="prefix" name="right-from-bracket" variant="solid"></wa-icon>
+                    <wa-icon slot="start" name="right-from-bracket" variant="solid"></wa-icon>
                     Logout
                   </wa-button>
                 </Link>

@@ -65,11 +65,11 @@ export default function WAComponentIcon({
         {options.map((option, i) =>(
           <wa-option key={`option-${id}-${option.value}`} value={option.value}>
             {
-              option.prefixIcon && <wa-icon {...option.prefixIcon} slot="prefix" ></wa-icon>
+              option.prefixIcon && <wa-icon {...option.prefixIcon} slot="start" ></wa-icon>
             }
             {option.label}
             {
-              option.suffixIcon && <wa-icon {...option.suffixIcon} slot="suffix" ></wa-icon>
+              option.suffixIcon && <wa-icon {...option.suffixIcon} slot="end" ></wa-icon>
             }
           </wa-option>
         ))}

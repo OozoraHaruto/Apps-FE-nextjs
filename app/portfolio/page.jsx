@@ -29,20 +29,20 @@ export default function ProfileWrapper() {
             </div>
             <div id={ style.portfolioExternalLinks }>
               <a href="https://github.com/OozoraHaruto" target='_blank'>
-                <wa-icon-button name="github" family="brands"></wa-icon-button>
+                <wa-button variant="neutral" appearance="plain"><wa-icon name="github" family="brands"></wa-icon></wa-button>
               </a>
               <a href="https://www.linkedin.com/in/malcolmchew/" target='_blank'>
-                <wa-icon-button name="linkedin" family="brands"></wa-icon-button>
+                <wa-button variant="neutral" appearance="plain"><wa-icon name="linkedin" family="brands"></wa-icon></wa-button>
               </a>
               <a href="mailto:malcolmchew1993@gmail.com" target='_blank'>
-                <wa-icon-button name="envelope" variant="solid"></wa-icon-button>
+                <wa-button variant="neutral" appearance="plain"><wa-icon name="envelope" variant="solid"></wa-icon></wa-button>
               </a>
               <a href="tel:96480438" target='_blank'>
-                <wa-icon-button id="portfolio-link-phone" name="phone" variant="solid"></wa-icon-button>
+                <wa-button id="portfolio-link-phone" variant="neutral" appearance="plain"><wa-icon name="phone" variant="solid"></wa-icon></wa-button>
                 <wa-tooltip for="portfolio-link-phone" placement="bottom" hoist>Please drop me a text before calling</wa-tooltip>
               </a>
               <a href="https://drive.google.com/file/d/1CY5BdVI3h0F7TpDhhwn_u55QImFMctBg/view?usp=sharing" target='_blank'>
-                <wa-icon-button id="portfolio-link-resume" name="file" variant="solid"></wa-icon-button>
+                <wa-button id="portfolio-link-resume" variant="neutral" appearance="plain"><wa-icon name="file" variant="solid"></wa-icon></wa-button>
                 <wa-tooltip for="portfolio-link-resume" placement="bottom" hoist>View my resume</wa-tooltip>
               </a>
             </div>

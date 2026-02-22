@@ -16,7 +16,7 @@ export const NavBarLink = ({ title, to, icon }) => {
         appearance={ isActive ? 'filled' : 'plain' }
         variant={ isActive ? 'brand' : 'neutral' }
       >
-        { icon && <wa-icon slot="prefix" name={ icon } variant="solid"></wa-icon> }
+        { icon && <wa-icon slot="start" name={ icon }></wa-icon> }
         { title }
       </wa-button>
     </Link>
@@ -29,10 +29,10 @@ export const NavBarDropDownLink = ({ title, to, icon }) => {
 
   return (
     <Link href={ to } style={ { textDecoration: 'None' } }>
-      <wa-menu-item>
-        { icon && <wa-icon slot="prefix" name={ icon } variant="solid"></wa-icon> }
+      <wa-dropdown-item>
+        { icon && <wa-icon slot="icon" name={ icon }></wa-icon> }
         { title }
-      </wa-menu-item>
+      </wa-dropdown-item>
     </Link>
   )
 };
